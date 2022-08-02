@@ -1,0 +1,66 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+  <title>Predict an Endangered Animals</title>  
+  <script src="https://kit.fontawesome.com/7c11a8c9a5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="bgImg">
+    <div id="title">
+      <h1>What species of endangered animal is this?</h1>
+      <h4>Mammals</h4>
+    </div>
+    <div id="content">
+      <form id="form" action="{{ url_for('getprediction')}}" method="post" enctype="multipart/form-data">
+        <input type="file" class="img-form" id="img" name="img" accept="image/*" onchange="previewImage()" required>
+        <button id="prd-btn" type="submit"><i class='fas fa-arrow-right' style='color:#ffffff'></i></button>
+      </form>
+      
+      <br>
+      <img id="prev0-img" style="visibility: {{ vis0 }}; height: {{ height0 }}" src="{{ url_for('static', filename='img/ph.png') }}">
+      <img id="prev-img" style="visibility: {{ visibility }}; height: {{ height }}" src="{{ url_for('static', filename=filename) }}">
+      <br>
+      <div id="info">
+        <div style="visibility: {{ visibility }};" class="output">
+          <p>Species Name</p>
+          {{ output1 }}
+        </div>
+        <br>
+        <div id="about" style="visibility: {{ visibility }};" class="output">
+          <p>About</p>
+          {{ output2 }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function bottom() {
+      document.getElementById('about').scrollIntoView();
+    };
+    bottom();
+
+    function previewImage(){
+      var oFReader = new FileReader();
+      oFReader.readAsDataURL(document.getElementById('img').files[0]);
+
+      oFReader.onload = function(oFREvent){
+
+        document.getElementById('prev0-img').style.visibility = 'hidden';
+        document.getElementById('prev0-img').style.height = 0;
+        document.getElementById('prev-img').style.visibility = 'visible';
+        document.getElementById('prev-img').style.height = 450;
+
+        document.getElementsByClassName('output')[0].style.visibility = 'hidden';
+        document.getElementsByClassName('output')[0].style.height = 0;
+        document.getElementsByClassName('output')[1].style.visibility = 'hidden';
+        document.getElementsByClassName('output')[1].style.height = 0;
+
+        document.getElementById('prev-img').src = oFREvent.target.result;
+      }
+    }
+  </script>
+
+</body>
+</html>
