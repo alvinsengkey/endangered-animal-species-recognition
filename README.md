@@ -3,9 +3,7 @@ An Endangered Animal Species Recognition app, with Machine Learning and Flask we
 
 1. Start
 
-<center>
 ![ss1](https://user-images.githubusercontent.com/72287069/183973968-071af072-b83c-4f70-9b9d-23f49a35f14a.png)
-  </center>
 
 2. Choose File
 
